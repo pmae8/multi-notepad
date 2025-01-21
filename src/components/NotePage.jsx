@@ -3,12 +3,13 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { NotesContext } from "../context/NotesContext";
 import TaskItem from "./TaskItem";
 import { debounce } from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 function NotePage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { notes, updateNote, deleteNote } = useContext(NotesContext);
-  const note = notes.find((n) => n.id === id);
+  const note = notes.find((note) => note.id === id);
 
   const [title, setTitle] = useState(note?.title || "");
   const [text, setText] = useState(note?.text || "");
@@ -28,7 +29,7 @@ function NotePage() {
     debounce((id, updatedNote) => {
       updateNote(id, updatedNote);
     }, 500),
-    [updateNote]
+    [updateNote] // Keep updateNote as a dependency
   );
 
   useEffect(() => {
@@ -36,12 +37,27 @@ function NotePage() {
   }, [id, note, title, text, tasks, debouncedUpdateNote]);
 
   const handleAddTask = () => {
-    setTasks([...tasks, { id: Date.now(), text: "", completed: false }]);
+    const newTask = { id: uuidv4(), text: "", completed: false };
+    setTasks([...tasks, newTask]);
+    debouncedUpdateNote(id, { tasks });
   };
 
   const handleDelete = () => {
     deleteNote(id);
     navigate("/");
+  };
+
+  const handleUpdateTask = (index, updatedTask) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index] = updatedTask;
+    setTasks(updatedTasks);
+    debouncedUpdateNote(id, { tasks });
+  };
+
+  const handleDeleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    debouncedUpdateNote(id, { tasks });
   };
 
   const toggleSidebar = () => {
@@ -59,6 +75,10 @@ function NotePage() {
     adjustHeight();
   }, [text]);
 
+  if (!note) {
+    return <div>Note not found</div>;
+  }
+
   return (
     <div className="note-page">
       <button className="toggle-sidebar-button" onClick={toggleSidebar}>
@@ -69,7 +89,7 @@ function NotePage() {
           <h3>Notes</h3>
           <ul className="note-list">
             {notes.map((note) => (
-              <li key={note.id}>
+              <li key={note.id} onClick={() => navigate(`/note/${note.id}`)}> 
                 <Link to={`/note/${note.id}`}>{note.title || "Untitled Note"}</Link>
               </li>
             ))}
@@ -102,13 +122,8 @@ function NotePage() {
             <TaskItem
               key={task.id}
               task={task}
-              onUpdate={(updatedTask) => {
-                const newTasks = tasks.map((t, i) =>
-                  i === index ? updatedTask : t
-                );
-                setTasks(newTasks);
-              }}
-              onDelete={() => setTasks(tasks.filter((_, i) => i !== index))}
+              onUpdate={(updatedTask) => handleUpdateTask(index, updatedTask)}
+              onDelete={() => handleDeleteTask(index)}
             />
           ))}
           <button onClick={handleAddTask}>+ CheckBox </button>
