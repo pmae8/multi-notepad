@@ -304,6 +304,11 @@ button {
   align-items: flex-start;
 }
 
+.note-textarea {
+  overflow: hidden;
+  resize: none; /* Prevent manual resizing */
+}
+
 /* Media Queries for Phones */
 @media (max-width: 768px) {
   .app {

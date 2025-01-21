@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, { useContext, useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { NotesContext } from "../context/NotesContext";
 import TaskItem from "./TaskItem";
@@ -14,6 +14,7 @@ function NotePage() {
   const [text, setText] = useState(note?.text || "");
   const [tasks, setTasks] = useState(note?.tasks || []);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     if (note) {
@@ -47,6 +48,17 @@ function NotePage() {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
+  const adjustHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [text]);
+
   return (
     <div className="note-page">
       <button className="toggle-sidebar-button" onClick={toggleSidebar}>
@@ -75,10 +87,14 @@ function NotePage() {
         />
         <textarea
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+            adjustHeight();
+          }}
           placeholder="Write your note here..."
           className="note-textarea"
           rows={6}
+          ref={textareaRef}
         ></textarea>
         <div className="tasks-section">
           {/* <h3>Tasks</h3> */}
