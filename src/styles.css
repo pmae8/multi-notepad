@@ -14,7 +14,7 @@ h1, h2, h3 {
 }
 
 button {
-  padding: 10px 15px;
+  padding: 8px 10px;
   margin: 5px;
   border: none;
   border-radius: 20px;
@@ -23,6 +23,7 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  font-size: 0.9rem;
 }
 
 button:hover {
@@ -78,8 +79,9 @@ input:focus, textarea:focus {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 10px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
 }
 
 .note-list li:hover {
@@ -100,21 +102,68 @@ input:focus, textarea:focus {
 
 /* Note Page */
 .note-page {
-  padding: 20px;
+  padding: 15px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  display: flex;
+  position: relative;
+}
+
+.toggle-sidebar-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.note-editor {
+  flex: 1;
+  padding: 10px;
+  transition: margin-left 0.3s;
+}
+
+.note-editor.with-sidebar {
+  margin-left: 200px;
+}
+
+.note-list {
+  list-style: none;
+  padding: 0;
+}
+
+.note-list li {
+  margin-bottom: 5px;
+}
+
+.note-list li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.note-list li a:hover {
+  text-decoration: underline;
 }
 
 .note-title-input {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .note-textarea {
   resize: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .tasks-section h3 {
@@ -133,6 +182,8 @@ input:focus, textarea:focus {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .task-item input[type="checkbox"] {
@@ -148,6 +199,10 @@ input:focus, textarea:focus {
   background-color: red ;
 }
 
+.completed-task {
+  text-decoration: line-through;
+}
+
 .actions {
   margin-top: 20px;
   display: flex;
@@ -158,10 +213,6 @@ input:focus, textarea:focus {
 .actions button {
   padding: 12px 20px;
   font-size: 1rem;
-}
-
-.actions button:nth-child(1) {
-  background: #2ecc71;
 }
 
 .actions button:nth-child(1):hover {
@@ -176,6 +227,81 @@ input:focus, textarea:focus {
   background: #c0392b;
 }
 
+.note-list li {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.note-page {
+  display: flex;
+  position: relative;
+  padding: 15px;
+}
+
+.toggle-sidebar-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  background: #357abd;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.note-editor {
+  flex: 1;
+  padding: 10px;
+  transition: margin-left 0.3s;
+}
+
+.note-editor.with-sidebar {
+  margin-left: 200px;
+}
+
+.note-list {
+  list-style: none;
+  padding: 0;
+}
+
+.note-list li {
+  margin-bottom: 5px;
+}
+
+.note-list li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.note-list li a:hover {
+  text-decoration: underline;
+}
+
+.note-title-input {
+  font-size: 1.2rem;
+}
+
+.note-textarea {
+  font-size: 0.9rem;
+}
+
+button {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+
+.task-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 /* Media Queries for Phones */
 @media (max-width: 768px) {
   .app {
@@ -187,41 +313,47 @@ input:focus, textarea:focus {
     font-size: 1.8rem;
   }
 
-  .note-list li {
+  .note-page {
+    flex-direction: column;
     padding: 10px;
-    font-size: 1rem;
   }
 
-  .note-page {
-    padding: 15px;
+  .toggle-sidebar-button {
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .note-editor {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .note-editor.with-sidebar {
+    margin-left: 0;
   }
 
   .note-title-input {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .note-textarea {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   button {
-    padding: 8px 10px;
-    font-size: 0.9rem;
+    padding: 6px 8px;
+    font-size: 0.8rem;
   }
 
   .task-item {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .task-item input[type="text"] {
-    margin-left: 0;
-    margin-top: 5px;
-    width: 100%;
-  }
-
-  .actions {
-    flex-direction: column;
-    gap: 10px;
   }
 }

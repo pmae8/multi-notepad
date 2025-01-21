@@ -20,7 +20,8 @@ function TaskItem({ task, onUpdate, onDelete }) {
         type="text"
         value={task.text}
         onChange={handleTextChange}
-        placeholder="Task description"
+        placeholder="Type here"
+        className={task.completed ? "completed-task" : ""}
       />
       <button onClick={onDelete}>🗑️</button>
     </div>
