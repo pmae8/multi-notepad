@@ -65,7 +65,7 @@ function NotePage() {
         </div>
       )}
       <div className={`note-editor ${isSidebarVisible ? "with-sidebar" : ""}`}>
-        <h2>Note Editor</h2>
+        <h2>{note.title}</h2>
         <input
           type="text"
           value={title}
@@ -81,7 +81,7 @@ function NotePage() {
           rows={6}
         ></textarea>
         <div className="tasks-section">
-          <h3>Tasks</h3>
+          {/* <h3>Tasks</h3> */}
           {tasks.map((task, index) => (
             <TaskItem
               key={task.id}
@@ -95,7 +95,7 @@ function NotePage() {
               onDelete={() => setTasks(tasks.filter((_, i) => i !== index))}
             />
           ))}
-          <button onClick={handleAddTask}>+ Add Task</button>
+          <button onClick={handleAddTask}>+ CheckBox </button>
         </div>
         <div className="actions">
           <button onClick={handleDelete} style={{ backgroundColor: "red" }}>
