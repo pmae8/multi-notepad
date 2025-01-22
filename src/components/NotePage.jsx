@@ -89,8 +89,10 @@ function NotePage() {
           <h3>Notes</h3>
           <ul className="note-list">
             {notes.map((note) => (
-              <li key={note.id} onClick={() => navigate(`/note/${note.id}`)}> 
-                <Link to={`/note/${note.id}`}>{note.title || "Untitled Note"}</Link>
+              <li key={note.id}>
+                <Link to={`/note/${note.id}`} className="note-link">
+                  {note.title || "Untitled Note"}
+                </Link>
               </li>
             ))}
           </ul>

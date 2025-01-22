@@ -18,7 +18,9 @@ function Homepage() {
       <ul className="note-list">
         {notes.map((note) => (
           <li key={note.id}>
-            <Link to={`/note/${note.id}`}>{note.title || "Untitled Note"}</Link>
+            <Link to={`/note/${note.id}`} className="note-link">
+              {note.title || "Untitled Note"}
+            </Link>
           </li>
         ))}
       </ul>
