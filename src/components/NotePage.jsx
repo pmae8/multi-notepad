@@ -111,14 +111,23 @@ function NotePage() {
         </div>
       )}
       <div className={`note-editor ${isSidebarVisible ? "with-sidebar" : ""}`}>
-        <h2>{note.title}</h2>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Note Title"
-          className="note-title-input"
-        />
+      <h2>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Note Title"
+            className="note-title-input"
+            style={{
+              border: "none",
+              background: "none",
+              fontSize: "inherit",
+              fontWeight: "inherit",
+              width: "100%",
+              textAlign: "center",
+            }}
+          />
+        </h2>
         <textarea
           value={text}
           onChange={(e) => {

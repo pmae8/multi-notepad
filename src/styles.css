@@ -76,11 +76,10 @@ input:focus, textarea:focus {
 }
 
 .note-list li {
-  margin: 10px 0;
+  margin-top: 5px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 10px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   font-size: 1rem;
 }
@@ -111,7 +110,9 @@ input:focus, textarea:focus {
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+  margin-top: none;
+  max-width: 800px;
+  min-height: 100vh;
   display: flex;
   position: relative;
 }
@@ -227,11 +228,6 @@ input:focus, textarea:focus {
 
 .actions button:nth-child(2):hover {
   background: #c0392b;
-}
-
-.note-list li {
-  padding: 10px;
-  font-size: 1rem;
 }
 
 .note-page {
