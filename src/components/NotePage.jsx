@@ -28,8 +28,8 @@ function NotePage() {
   const debouncedUpdateNote = useCallback(
     debounce((id, updatedNote) => {
       updateNote(id, updatedNote);
-    }, 500),
-    [updateNote] // Keep updateNote as a dependency
+    }, 100),
+    [updateNote] 
   );
 
   useEffect(() => {
@@ -151,7 +151,7 @@ function NotePage() {
           <button onClick={handleAddTask}>+ CheckBox </button>
         </div>
         <div className="actions">
-          <button onClick={handleDelete} style={{ backgroundColor: "red" }}>
+          <button onClick={handleDelete} className="delete-note-button" style={{ backgroundColor: "red" }}>
             Delete Note
           </button>
         </div>

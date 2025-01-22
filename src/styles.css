@@ -96,14 +96,6 @@ input:focus, textarea:focus {
   font-size: 1.1rem;
 }
 
-.note-link {
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 /* Note Page */
 .note-page {
   padding: 15px;
@@ -295,7 +287,12 @@ button {
 
 .note-textarea {
   overflow: hidden;
-  resize: none; /* Prevent manual resizing */
+  resize: none;
+}
+.delete-note-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 /* Media Queries for Phones */
