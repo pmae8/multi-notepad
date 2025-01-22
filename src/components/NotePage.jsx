@@ -75,6 +75,18 @@ function NotePage() {
     adjustHeight();
   }, [text]);
 
+  useEffect(() => {
+    const handlePopState = (event) => {
+      navigate("/");
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [navigate]);
+
   if (!note) {
     return <div>Note not found</div>;
   }
@@ -119,7 +131,6 @@ function NotePage() {
           ref={textareaRef}
         ></textarea>
         <div className="tasks-section">
-          {/* <h3>Tasks</h3> */}
           {tasks.map((task, index) => (
             <TaskItem
               key={task.id}

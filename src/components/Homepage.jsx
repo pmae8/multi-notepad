@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NotesContext } from "../context/NotesContext";
 
@@ -10,6 +10,20 @@ function Homepage() {
     const newNote = addNote();
     navigate(`/note/${newNote.id}`);
   };
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (window.location.pathname === "/") {
+        window.close();
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
     <div className="homepage">
