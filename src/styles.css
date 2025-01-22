@@ -215,12 +215,9 @@ input:focus, textarea:focus {
 
 .actions button {
   padding: 12px 20px;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
-.actions button:nth-child(1):hover {
-  background: #27ae60;
-}
 
 .actions button:nth-child(2) {
   background: #e74c3c;
